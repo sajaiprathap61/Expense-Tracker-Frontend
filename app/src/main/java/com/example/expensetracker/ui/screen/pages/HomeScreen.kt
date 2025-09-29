@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -34,6 +36,12 @@ fun HomeScreen() {
     val ranges = listOf("Today", "Month", "Year")
     val amount = 2789
     val expenses = listOf(
+        Expense(title = "Shopping", amount = 120, date = "Sep 28, 2025", icon = "shopping"),
+        Expense(title = "Groceries", amount = 80, date = "Sep 27, 2025", icon = "groceries"),
+        Expense(title = "Vegetables", amount = 50, date = "Sep 26, 2025", icon = "vegetables"),
+        Expense(title = "Shopping", amount = 120, date = "Sep 28, 2025", icon = "shopping"),
+        Expense(title = "Groceries", amount = 80, date = "Sep 27, 2025", icon = "groceries"),
+        Expense(title = "Vegetables", amount = 50, date = "Sep 26, 2025", icon = "vegetables"),
         Expense(title = "Shopping", amount = 120, date = "Sep 28, 2025", icon = "shopping"),
         Expense(title = "Groceries", amount = 80, date = "Sep 27, 2025", icon = "groceries"),
         Expense(title = "Vegetables", amount = 50, date = "Sep 26, 2025", icon = "vegetables"),
@@ -112,13 +120,13 @@ fun EqualWidthRow(ranges: List<String>) {
 @Composable
 fun ListOfExpense(expenses: List<Expense>) {
 
+    Text(text = "List of Expenses:", style = TextStyle(fontSize = 20.sp))
+
 // List of Expense
-    Column(
+    LazyColumn(
         modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Text(text = "List of Expenses:", style = TextStyle(fontSize = 20.sp))
-
-        expenses.forEach { expense ->
+        items(expenses) { expense ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -128,7 +136,7 @@ fun ListOfExpense(expenses: List<Expense>) {
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.shopping),
+                    painter = painterResource(id = R.drawable.vegetable),
                     contentDescription = "Category Icons",
                     modifier = Modifier.width(50.dp)
                 )
